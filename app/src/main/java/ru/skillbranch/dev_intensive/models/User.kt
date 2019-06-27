@@ -19,4 +19,8 @@ class User(
         avatar = null)
 
     constructor(id: String) : this(id, "John", "Doe $id")
+
+    init {
+        println("It's Allive!!!")
+    }
 }
