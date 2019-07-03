@@ -1,5 +1,6 @@
 package ru.skillbranch.dev_intensive.models
 
+import ru.skillbranch.dev_intensive.utils.Utils
 import java.util.*
 
 class User(
@@ -50,11 +51,9 @@ class User(
         private var lastId:Int = -1
         fun makeUser(fullName:String?) : User{
             lastId++
-            val parts: List<String>? = fullName?.split(" ")
 
-           // val firstName = parts?.getOrNull(0)
-            var firstName: String? = parts?.getOrNull(0)
-            var lastName = parts?.getOrNull(1)
+            var (firstName, lastName) = Utils.parseFullName(fullName)
+
             if (firstName == null || firstName=="") firstName = "John"
             if (lastName == null || lastName=="") lastName = "Doe $lastId"
 
