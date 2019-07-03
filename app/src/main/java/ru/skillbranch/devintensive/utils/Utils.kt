@@ -1,4 +1,4 @@
-package ru.skillbranch.dev_intensive.utils
+package ru.skillbranch.devintensive.utils
 
 object Utils {
     fun parseFullName(fullName:String?): Pair<String?, String?> {
@@ -8,6 +8,8 @@ object Utils {
         var firstName = parts?.getOrNull(0)
         var lastName = parts?.getOrNull(1)
 
-        return Pair(firstName, lastName)
+        //return Pair(firstName, lastName)
+        return firstName to lastName
+
     }
 }

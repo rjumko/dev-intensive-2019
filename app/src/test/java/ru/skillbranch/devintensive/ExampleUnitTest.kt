@@ -1,10 +1,9 @@
-package ru.skillbranch.dev_intensive
+package ru.skillbranch.devintensive
 
 import org.junit.Test
 
 import org.junit.Assert.*
-import ru.skillbranch.dev_intensive.models.User
-import java.util.*
+import ru.skillbranch.devintensive.models.User
 
 /**
  * Example local unit test, which will execute on the development machine (host).
