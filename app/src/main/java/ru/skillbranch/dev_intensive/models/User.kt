@@ -24,8 +24,7 @@ class User(
 
     init {
         println("It's Allive!!!\n" +
-                "${if(lastName === "Doe") "His name is $firstName $lastName" else "And his name is $firstName $lastName!!!"}\n" +
-        "${getIntro()}")
+                "${if(lastName === "Doe") "His name is $firstName $lastName" else "And his name is $firstName $lastName!!!"}\n")
     }
 
     private fun getIntro()="""
@@ -46,5 +45,21 @@ class User(
             isOnline: $isOnline
 
         """.trimIndent())
+
+    companion object Factory {
+        private var lastId:Int = -1
+        fun makeUser(fullName:String?) : User{
+            lastId++
+            val parts: List<String>? = fullName?.split(" ")
+
+           // val firstName = parts?.getOrNull(0)
+            var firstName: String? = parts?.getOrNull(0)
+            var lastName = parts?.getOrNull(1)
+            if (firstName == null || firstName=="") firstName = "John"
+            if (lastName == null || lastName=="") lastName = "Doe $lastId"
+
+            return User(id= "$lastId", firstName = firstName, lastName = lastName)
+        }
+    }
 
 }
