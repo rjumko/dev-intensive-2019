@@ -21,6 +21,19 @@ class User(
     constructor(id: String) : this(id, "John", "Doe $id")
 
     init {
-        println("It's Allive!!!")
+        println("It's Allive!!! His name is $firstName $lastName")
     }
+
+    fun printMe() = println("""
+            id: $id
+            firstName: $firstName
+            lastName: $lastName
+            avatar: $avatar
+            rating: $rating
+            respect: $respect
+            lastVisit: $lastVisit
+            isOnline: $isOnline
+
+        """.trimIndent())
+
 }
