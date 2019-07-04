@@ -34,4 +34,14 @@ class ExampleUnitTest {
         User.makeUser("")
         User.makeUser(null)
     }
+
+    @Test
+    fun test_copy() {
+        val user = User.makeUser("John psin1")
+        val user2 = user.copy(firstName = "Edik", lastName = "Britt")
+
+        print("$user\n$user2")
+        println()
+        print("${user.hashCode()}\n${user2.hashCode()}")
+    }
 }
