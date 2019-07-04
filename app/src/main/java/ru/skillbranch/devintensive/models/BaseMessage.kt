@@ -9,4 +9,7 @@ abstract class BaseMessage(
     val isIncoming: Boolean,
     val date: Date = Date()
 ) {
+
+    abstract fun formatMessage(): String
+
 }
