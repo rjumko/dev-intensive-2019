@@ -12,4 +12,10 @@ object Utils {
         return firstName to lastName
 
     }
+
+    fun transliteration(s: String): String {
+
+        return "TODO"
+
+    }
 }
