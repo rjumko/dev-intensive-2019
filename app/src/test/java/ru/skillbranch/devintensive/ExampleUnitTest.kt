@@ -6,6 +6,7 @@ import org.junit.Assert.*
 import ru.skillbranch.devintensive.extensions.TimeUnits
 import ru.skillbranch.devintensive.extensions.add
 import ru.skillbranch.devintensive.extensions.format
+import ru.skillbranch.devintensive.extensions.toUserView
 import ru.skillbranch.devintensive.models.User
 import java.util.*
 
@@ -47,5 +48,13 @@ class ExampleUnitTest {
         //print("$user\n$user2")
         //println()
         print("${user.lastVisit?.format("HH:mm:ss dd.MM.yy")}\n${user2.lastVisit?.format("HH:mm:ss dd.MM.yy")}")
+    }
+
+    @Test
+    fun test_data_mapping() {
+        val user = User.makeUser("Алексеев Роман")
+        val userView = user.toUserView()
+
+        userView.printMe()
     }
 }

@@ -13,9 +13,14 @@ object Utils {
 
     }
 
-    fun transliteration(s: String): String {
+    fun transliteration(payload: String, divider: String): String {
 
-        return "TODO"
+        return "need implement transliteration()"
+        //TODO("need implement")
 
+    }
+
+    fun toInitials(firstName: String?, lastName: String?): String? {
+        return firstName?.take(1) + lastName?.take(1)
     }
 }

@@ -30,7 +30,8 @@ fun Date.add(value: Int, units: TimeUnits) : Date {
 }
 
 fun Date.humanizeDiff(): String {
-    return "TODO"
+    return "need implement humanizeDiff()"
+    //TODO("need implement")
 }
 
 enum class TimeUnits {
