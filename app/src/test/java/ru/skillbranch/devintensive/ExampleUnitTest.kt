@@ -3,7 +3,11 @@ package ru.skillbranch.devintensive
 import org.junit.Test
 
 import org.junit.Assert.*
+import ru.skillbranch.devintensive.extensions.TimeUnits
+import ru.skillbranch.devintensive.extensions.add
+import ru.skillbranch.devintensive.extensions.format
 import ru.skillbranch.devintensive.models.User
+import java.util.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -38,10 +42,10 @@ class ExampleUnitTest {
     @Test
     fun test_copy() {
         val user = User.makeUser("John psin1")
-        val user2 = user.copy(firstName = "Edik", lastName = "Britt")
+        val user2 = user.copy(firstName = "Edik", lastName = "Britt", lastVisit = Date().add(3, TimeUnits.DAY))
 
-        print("$user\n$user2")
-        println()
-        print("${user.hashCode()}\n${user2.hashCode()}")
+        //print("$user\n$user2")
+        //println()
+        print("${user.lastVisit?.format("HH:mm:ss dd.MM.yy")}\n${user2.lastVisit?.format("HH:mm:ss dd.MM.yy")}")
     }
 }
