@@ -98,6 +98,27 @@ class ExampleUnitTest {
         assertEquals("ST", Utils.toInitials("  samuel  ", "  tommy"))
         assertEquals("J", Utils.toInitials(null, "John"))
     }
+
+    @Test
+    fun transliteration_test() {
+        /* skillBranch tests */
+
+        println(Utils.transliteration("Женя Стереотипов"))
+        for ( i in 'А' .. 'Я') print(i+" ")
+        assertEquals("Zhenya Stereotipov", Utils.transliteration("Женя Стереотипов"))
+        assertEquals("Amazing_Petr", Utils.transliteration("Amazing Петр","_"))
+
+        /* additional tests */
+        assertEquals("iVan     Stereotizhov", Utils.transliteration(" иВан     Стереотижов "))
+        assertEquals("Amazing_PeZhr", Utils.transliteration(" Amazing ПеЖр ", "_"))
+        assertEquals("aAbBvVgGdDeEeEzhZhzZiIiIkKlL", Utils.transliteration("аАбБвВгГдДеЕёЁжЖзЗиИйЙкКлЛ"))
+        assertEquals("mMnNoOpPrRsStTuUfFhHcCshShsh'Sh'", Utils.transliteration("мМнНоОпПрРсСтТуУфФхХцЦшШщЩ"))
+        assertEquals("eEyuYuyaYa", Utils.transliteration("ъЪьЬэЭюЮяЯ"))
+        assertEquals("123|!,^-=+><|english", Utils.transliteration("123 !,^-=+>< english", "|"))
+        assertEquals("Zhizha ZhiZhnaYa", Utils.transliteration("Жижа ЖиЖнаЯ"))
+        assertEquals("Sobaka is a dog", Utils.transliteration("Собака dog", " is a "))
+    }
+
 }
 
 
