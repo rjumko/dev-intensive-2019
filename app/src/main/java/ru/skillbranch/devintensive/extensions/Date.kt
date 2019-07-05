@@ -3,6 +3,7 @@ package ru.skillbranch.devintensive.extensions
 import java.lang.IllegalStateException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 const val SECOND = 1000L
 const val MINUTE = 60 * SECOND
@@ -33,20 +34,31 @@ fun Date.humanizeDiff(currDate: Date = Date()): String {
 
     fun declension(number: Int, units: TimeUnits): String {
 
+
         return when (units) {
-            TimeUnits.HOUR -> when (number) {
-                1 -> "час"
-                2, 3, 4 -> "часа"
-                else -> "часов"
+            TimeUnits.HOUR -> when (number % 100) {
+                10, 11, 12, 13, 14 -> "часов"
+                else -> when (number % 10) {
+                    1 -> "час"
+                    2, 3, 4 -> "часа"
+                    else -> "часов"
+                }
             }
-            TimeUnits.MINUTE -> when (number) {
-                2, 3, 4 -> "минуты"
-                else -> "минут"
+            TimeUnits.MINUTE -> when (number % 100) {
+                10, 11, 12, 13, 14 -> "минут"
+                else -> when (number % 10) {
+                    1 -> "минуту"
+                    2, 3, 4 -> "минуты"
+                    else -> "минут"
+                }
             }
-            TimeUnits.DAY -> when (number) {
-                1 -> "день"
-                2, 3, 4 -> "дня"
-                else -> "дней"
+            TimeUnits.DAY -> when (number % 100) {
+                10, 11, 12, 13, 14 -> "дней"
+                else -> when (number % 10) {
+                    1 -> "день"
+                    2, 3, 4 -> "дня"
+                    else -> "дней"
+                }
             }
             else -> ""
         }
@@ -55,20 +67,25 @@ fun Date.humanizeDiff(currDate: Date = Date()): String {
 
     val currTime = currDate.time
     val time = this.time
-    val diffTime = (currTime - time) / 1000
+    val sign = (currTime - time) < 0
+    val diffTime = abs((currTime - time) / 1000)
+    val prefix = if (sign) "через " else ""
+    val postfix = if (!sign) " назад" else ""
 
     return when {
         diffTime < 2 -> "только что"
-        diffTime < 46 -> "несколько секунд назад"
-        diffTime < 76 -> "минуту назад"
-        diffTime < 2760 -> "${diffTime / 60} ${declension((diffTime / 60).toInt(), TimeUnits.MINUTE)} назад"
-        diffTime < 4560 -> "час назад"
-        diffTime < 82800 -> "${diffTime / 3600} ${declension((diffTime / 3600).toInt(), TimeUnits.HOUR)} назад"
-        diffTime < 97200 -> "день назад"
-        diffTime < 31190400 -> "${diffTime / 3600 / 24} ${declension((diffTime / 3600 / 24).toInt(), TimeUnits.DAY)} назад"
-        else -> "более года назад"
+        diffTime < 46 -> "${prefix}несколько секунд$postfix"
+        diffTime < 76 -> "${prefix}минуту$postfix"
+        diffTime < 2760 -> "$prefix${diffTime / 60} ${declension((diffTime / 60).toInt(), TimeUnits.MINUTE)}$postfix"
+        diffTime < 4560 -> "${prefix}час$postfix"
+        diffTime < 82800 -> "$prefix${diffTime / 3600} ${declension((diffTime / 3600).toInt(), TimeUnits.HOUR)}$postfix"
+        diffTime < 97200 -> "${prefix}день$postfix"
+        diffTime < 31190400 -> "$prefix${diffTime / 3600 / 24} ${declension(
+            (diffTime / 3600 / 24).toInt(),
+            TimeUnits.DAY
+        )}$postfix"
+        else -> if (!sign) "более года назад" else "более чем через год"
     }
-    //TODO("need implement")
 
     /* 0с - 1с "только что"                  0 - 1
      1с - 45с "несколько секунд назад"       2 - 45
