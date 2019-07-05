@@ -8,6 +8,7 @@ import ru.skillbranch.devintensive.extensions.add
 import ru.skillbranch.devintensive.extensions.format
 import ru.skillbranch.devintensive.extensions.toUserView
 import ru.skillbranch.devintensive.models.*
+import ru.skillbranch.devintensive.utils.Utils.parseFullName
 import java.util.*
 
 /**
@@ -68,4 +69,19 @@ class ExampleUnitTest {
         println(textMessage.formatMessage())
         println(imageMessage.formatMessage())
     }
+
+    @Test
+    fun test_parse_full_name() {
+        println(parseFullName("asd asd"))
+        println(parseFullName(null))
+        println(parseFullName(""))
+        println(parseFullName(" "))
+        println(parseFullName("John"))
+        println(parseFullName("     "))
+        println(parseFullName("null"))
+        println(parseFullName("John      "))
+        println(parseFullName(" John     "))
+    }
 }
+
+
