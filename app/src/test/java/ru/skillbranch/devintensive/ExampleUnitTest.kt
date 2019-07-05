@@ -8,6 +8,7 @@ import ru.skillbranch.devintensive.extensions.add
 import ru.skillbranch.devintensive.extensions.format
 import ru.skillbranch.devintensive.extensions.toUserView
 import ru.skillbranch.devintensive.models.*
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.utils.Utils.parseFullName
 import java.util.*
 
@@ -81,6 +82,21 @@ class ExampleUnitTest {
         println(parseFullName("null"))
         println(parseFullName("John      "))
         println(parseFullName(" John     "))
+    }
+
+    @Test
+    fun test_to_initials() {
+        assertEquals("JD", Utils.toInitials("john", "doe"))
+        assertEquals("J", Utils.toInitials("John", null))
+        assertEquals(null, Utils.toInitials(null, null))
+        assertEquals(null, Utils.toInitials(" ", ""))
+
+        /* additional tests */
+        assertEquals(null, Utils.toInitials(" ", null))
+        assertEquals(null, Utils.toInitials(null, ""))
+        assertEquals("T", Utils.toInitials(null, "  tommy"))
+        assertEquals("ST", Utils.toInitials("  samuel  ", "  tommy"))
+        assertEquals("J", Utils.toInitials(null, "John"))
     }
 }
 

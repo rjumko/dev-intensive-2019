@@ -24,6 +24,12 @@ object Utils {
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-        return firstName?.take(1) + lastName?.take(1)
+
+        //listUser?.getOrNull(10)?: “Unknow User and his name”
+        val tmpStr: String = (firstName?.trim()?.toUpperCase()?.getOrNull(0)?: "").toString()
+        val tmpStr2: String = (lastName?.trim()?.toUpperCase()?.getOrNull(0)?: "").toString()
+        return if (tmpStr == "" && tmpStr2 == "") null
+                else  tmpStr + tmpStr2
+
     }
 }
