@@ -96,13 +96,7 @@ class ExampleUnitTest {
         assertEquals("J", Utils.toInitials(null, "John"))
     }
 
-    @Test
-    fun test_simple() {
 
-        val x = 51
-        print(x % 100)
-
-    }
 
     @Test
     fun transliteration_test() {
@@ -331,6 +325,42 @@ class ExampleUnitTest {
         assertEquals("122 дня", TimeUnits.DAY.plural(122))
         assertEquals("311 дней", TimeUnits.DAY.plural(311))
         assertEquals("1234 дня", TimeUnits.DAY.plural(1234))
+    }
+
+    @Test
+    fun test_simple() {
+
+        println("&amp;&lt;&gt;single&#39;&quot;".replace("(&.*?;)|(<.*?>)".toRegex(), ""))
+        println("<p class=\\\"title\\\">Образовательное IT-сообщество Skill Branch</p>".replace("(&.*?;)|(<.*?>)".toRegex(), ""))
+       // assertEquals("single", "&amp;&lt;&gt;single&#39;&quot;".stripHtml())
+
+    }
+
+    @Test
+    fun stripHtmlTest() {
+        /* skillBranch tests */
+        assertEquals("Образовательное IT-сообщество Skill Branch",
+            "<p class=\"title\">Образовательное IT-сообщество Skill Branch</p>".stripHtml())
+        assertEquals("Образовательное IT-сообщество Skill Branch",
+            "<p>Образовательное       IT-сообщество Skill Branch</p>".stripHtml())
+
+        /* additional tests */
+        assertEquals("single", "&amp;&lt;&gt;single&#39;&quot;".stripHtml())
+        assertEquals("", "&amp;&lt;&gt;&#39;&quot;".stripHtml())
+        assertEquals(" ", "&amp;&lt;&gt;    &#39;&quot;".stripHtml())
+        assertEquals("1978", "<path fill=\"Color\" d=\"M11.63 10z\"></svg><span>1978</span>".stripHtml())
+        assertEquals("", "&gt;<head>&#39;&quot;</head>".stripHtml())
+        assertEquals(" ", "&gt;<head> &quot; </head>".stripHtml())
+        assertEquals("&игра; amp lt &gt 39; meters ()quot;", "&игра; amp lt &gt 39; meters ()quot;".stripHtml())
+        assertEquals(" one two ", "  one   two ".stripHtml())
+        assertEquals("null", "null".stripHtml())
+        val longHtml = """
+            <TD valign="top" style="padding-bottom:15px;"> <b>line1<b> </TD>
+            <TD valign="top"> <span class="HeadTitleNews"> line2</span>
+            <img src='http://2011WaterpoloF.jpg' >
+            <div style="margin: 0in 0in 0pt">line3</div>
+        """.trimIndent()
+        assertEquals(" line1 \n line2\n\nline3", longHtml.stripHtml())
     }
 
 }
