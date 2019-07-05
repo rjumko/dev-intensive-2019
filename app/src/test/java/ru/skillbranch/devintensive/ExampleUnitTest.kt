@@ -3,10 +3,7 @@ package ru.skillbranch.devintensive
 import org.junit.Test
 
 import org.junit.Assert.*
-import ru.skillbranch.devintensive.extensions.TimeUnits
-import ru.skillbranch.devintensive.extensions.add
-import ru.skillbranch.devintensive.extensions.format
-import ru.skillbranch.devintensive.extensions.toUserView
+import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.*
 import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.utils.Utils.parseFullName
@@ -117,6 +114,21 @@ class ExampleUnitTest {
         assertEquals("123|!,^-=+><|english", Utils.transliteration("123 !,^-=+>< english", "|"))
         assertEquals("Zhizha ZhiZhnaYa", Utils.transliteration("Жижа ЖиЖнаЯ"))
         assertEquals("Sobaka is a dog", Utils.transliteration("Собака dog", " is a "))
+    }
+
+    @Test
+    fun humanizeDiffTest() {
+
+        val date = Date()
+        val date2 = Date().add(100, TimeUnits.DAY)
+        println(date)
+        //println(date.add(6, TimeUnits.SECOND))
+        println(date2.time)
+       // println(date.add(6, TimeUnits.SECOND).time.toString())
+        println((date2.time - date.time)/1000)
+
+        println(date.humanizeDiff(date2))
+
     }
 
 }
