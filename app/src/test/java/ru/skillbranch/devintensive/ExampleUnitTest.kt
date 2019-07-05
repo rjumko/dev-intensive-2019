@@ -262,6 +262,54 @@ class ExampleUnitTest {
         assertFalse(user3.isOnline)
     }
 
+    @Test
+    fun test_plural() {
+        assertEquals("0 секунд", TimeUnits.SECOND.plural(0))
+        assertEquals("1 секунду", TimeUnits.SECOND.plural(1))
+        assertEquals("2 секунды", TimeUnits.SECOND.plural(2))
+        assertEquals("7 секунд", TimeUnits.SECOND.plural(7))
+        assertEquals("14 секунд", TimeUnits.SECOND.plural(14))
+        assertEquals("24 секунды", TimeUnits.SECOND.plural(24))
+        assertEquals("102 секунды", TimeUnits.SECOND.plural(102))
+        assertEquals("112 секунд", TimeUnits.SECOND.plural(112))
+        assertEquals("122 секунды", TimeUnits.SECOND.plural(122))
+        assertEquals("311 секунд", TimeUnits.SECOND.plural(311))
+
+        assertEquals("0 минут", TimeUnits.MINUTE.plural(0))
+        assertEquals("1 минуту", TimeUnits.MINUTE.plural(1))
+        assertEquals("2 минуты", TimeUnits.MINUTE.plural(2))
+        assertEquals("7 минут", TimeUnits.MINUTE.plural(7))
+        assertEquals("14 минут", TimeUnits.MINUTE.plural(14))
+        assertEquals("24 минуты", TimeUnits.MINUTE.plural(24))
+        assertEquals("102 минуты", TimeUnits.MINUTE.plural(102))
+        assertEquals("112 минут", TimeUnits.MINUTE.plural(112))
+        assertEquals("122 минуты", TimeUnits.MINUTE.plural(122))
+        assertEquals("311 минут", TimeUnits.MINUTE.plural(311))
+
+        assertEquals("0 часов", TimeUnits.HOUR.plural(0))
+        assertEquals("1 час", TimeUnits.HOUR.plural(1))
+        assertEquals("2 часа", TimeUnits.HOUR.plural(2))
+        assertEquals("7 часов", TimeUnits.HOUR.plural(7))
+        assertEquals("14 часов", TimeUnits.HOUR.plural(14))
+        assertEquals("24 часа", TimeUnits.HOUR.plural(24))
+        assertEquals("102 часа", TimeUnits.HOUR.plural(102))
+        assertEquals("112 часов", TimeUnits.HOUR.plural(112))
+        assertEquals("122 часа", TimeUnits.HOUR.plural(122))
+        assertEquals("311 часов", TimeUnits.HOUR.plural(311))
+
+        assertEquals("0 дней", TimeUnits.DAY.plural(0))
+        assertEquals("1 день", TimeUnits.DAY.plural(1))
+        assertEquals("2 дня", TimeUnits.DAY.plural(2))
+        assertEquals("7 дней", TimeUnits.DAY.plural(7))
+        assertEquals("14 дней", TimeUnits.DAY.plural(14))
+        assertEquals("24 дня", TimeUnits.DAY.plural(24))
+        assertEquals("102 дня", TimeUnits.DAY.plural(102))
+        assertEquals("112 дней", TimeUnits.DAY.plural(112))
+        assertEquals("122 дня", TimeUnits.DAY.plural(122))
+        assertEquals("311 дней", TimeUnits.DAY.plural(311))
+        assertEquals("1234 дня", TimeUnits.DAY.plural(1234))
+    }
+
 }
 
 
