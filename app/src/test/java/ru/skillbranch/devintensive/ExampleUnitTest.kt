@@ -23,15 +23,16 @@ class ExampleUnitTest {
 
     @Test
     fun test_instance() {
-       // val user = User("1")
-       // val user2 = User("2", "John", "Doe")
-      //  val user3 = User("3", "John", "Silverhand", null, lastVisit = Date(), isOnline = true)
+        // val user = User("1")
+        // val user2 = User("2", "John", "Doe")
+        //  val user3 = User("3", "John", "Silverhand", null, lastVisit = Date(), isOnline = true)
 
-       // println("$user, $user2, $user3")
-       // user.printMe()
-       // user2.printMe()
-      //  user3.printMe()
+        // println("$user, $user2, $user3")
+        // user.printMe()
+        // user2.printMe()
+        //  user3.printMe()
     }
+
     @Test
     fun test_factory() {
         User.makeUser("Jonn psina")
@@ -61,8 +62,8 @@ class ExampleUnitTest {
     @Test
     fun test_abstract_factory() {
         val user = User.makeUser("Алексеев Роман")
-        val textMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any text message", type="text")
-        val imageMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any image url", type="image")
+        val textMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any text message", type = "text")
+        val imageMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any image url", type = "image")
 
         println(textMessage.formatMessage())
         println(imageMessage.formatMessage())
