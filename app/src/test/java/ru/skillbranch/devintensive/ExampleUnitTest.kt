@@ -8,6 +8,7 @@ import ru.skillbranch.devintensive.models.*
 import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.utils.Utils.parseFullName
 import java.util.*
+import kotlin.math.abs
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -124,6 +125,7 @@ class ExampleUnitTest {
         println(date)
         //println(date.add(6, TimeUnits.SECOND))
         println(date2.time)
+        println(abs(-555))
        // println(date.add(6, TimeUnits.SECOND).time.toString())
         println((date2.time - date.time)/1000)
 
