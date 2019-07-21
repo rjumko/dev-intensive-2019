@@ -3,8 +3,11 @@ package ru.skillbranch.devintensive
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
+
+    var banderImage: ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
