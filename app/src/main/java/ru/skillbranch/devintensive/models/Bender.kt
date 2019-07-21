@@ -16,7 +16,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         return if (question.answer.contains(answer)) {
             "Отлично - это правильный ответ!" to status.color
         } else {
-            "Это не провильный ответ!" to status.color
+            "Это не правильный ответ!" to status.color
         }
     }
 
