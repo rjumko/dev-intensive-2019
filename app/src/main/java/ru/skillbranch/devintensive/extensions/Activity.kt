@@ -19,27 +19,23 @@ fun Activity.hideKeyboard() {
 }
 
 fun Activity.isKeyboardOpen(): Boolean {
-    val rect = Rect()
-    val rootView = this.window.decorView
-    rootView.getWindowVisibleDisplayFrame(rect)
-    val screenHeight =rootView.height
-    val visibleDisplayFrameHeight = rect.bottom - rect.top
-
-    val keyboardHeight = screenHeight - (rect.bottom - rect.top)
-    Log.d("M_Activity", "$screenHeight $keyboardHeight ${rect.bottom} ${rect.top}")
-    //val diff = (screenHeight - visibleDisplayFrameHeight)
+    val (screenHeight, keyboardHeight) = this.screenKeyboardHeight()
+    Log.d("M_Activity", "$screenHeight $keyboardHeight")
     return (keyboardHeight > screenHeight / 3)
 }
 
 fun Activity.isKeyboardClosed(): Boolean {
+    val (screenHeight, keyboardHeight) = this.screenKeyboardHeight()
+    Log.d("M_Activity", "$screenHeight $keyboardHeight")
+    return (keyboardHeight < screenHeight / 3)
+}
+
+fun Activity.screenKeyboardHeight(): Pair<Int, Int> {
     val rect = Rect()
     val rootView = this.window.decorView
     rootView.getWindowVisibleDisplayFrame(rect)
     val screenHeight =rootView.height
-    val visibleDisplayFrameHeight = rect.bottom - rect.top
-
     val keyboardHeight = screenHeight - (rect.bottom - rect.top)
     Log.d("M_Activity", "$screenHeight $keyboardHeight ${rect.bottom} ${rect.top}")
-    //val diff = (screenHeight - visibleDisplayFrameHeight)
-    return (keyboardHeight < screenHeight / 3)
+    return screenHeight to keyboardHeight
 }
