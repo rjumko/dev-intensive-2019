@@ -3,6 +3,7 @@ package ru.skillbranch.devintensive.extensions
 import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
@@ -23,8 +24,9 @@ fun Activity.isKeyboardOpen(): Boolean {
     val rect = Rect()
     val rootView = this.window.decorView
     rootView.getWindowVisibleDisplayFrame(rect)
-    val visibleDisplayFrameHeight = rect.top
-    val screenHeight = this.windowManager.defaultDisplay.height
+    val screenHeight =rootView.height
+    val visibleDisplayFrameHeight = rect.bottom - rect.top
+    Log.d("M_Activity", "$screenHeight $visibleDisplayFrameHeight ${rect.bottom} ${rect.top}")
     val diff = (screenHeight - visibleDisplayFrameHeight)
     return diff > 100
 
@@ -35,8 +37,10 @@ fun Activity.isKeyboardClosed(): Boolean {
     val rect = Rect()
     val rootView = this.window.decorView
     rootView.getWindowVisibleDisplayFrame(rect)
-    val visibleDisplayFrameHeight = rect.top
-    val screenHeight = this.windowManager.defaultDisplay.height
+    val screenHeight =rootView.height
+    val visibleDisplayFrameHeight = rect.bottom - rect.top
+    Log.d("M_Activity", "$screenHeight $visibleDisplayFrameHeight ${rect.bottom} ${rect.top}")
     val diff = (screenHeight - visibleDisplayFrameHeight)
     return diff < 100
+
 }
