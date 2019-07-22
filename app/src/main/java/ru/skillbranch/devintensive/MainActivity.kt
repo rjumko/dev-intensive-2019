@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -31,7 +32,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         textTxt = tv_text
         messageEt = et_message
         sendBtn = iv_send
-        benderObj = Bender()
+
+        val status = savedInstanceState?.getString("STATUS") ?: Bender.Status.NORMAL.name
+        val question = savedInstanceState?.getString("QUESTION") ?: Bender.Question.NAME.name
+
+        benderObj = Bender(Bender.Status.valueOf(status), Bender.Question.valueOf(question))
+
+        val (r, g, b) = benderObj.status.color
+        benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
 
         //textTxt.setText(benderObj.askQuestion())
         textTxt.text = benderObj.askQuestion()
@@ -47,6 +55,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
             textTxt.text = phrase
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+        outState?.putString("STATUS", benderObj.status.name)
+        outState?.putString("QUESTION", benderObj.question.name)
+        Log.d("M_MainActivity", "onSaveInstanceState ${benderObj.status.name} ${benderObj.question.name}")
     }
 
     override fun onRestart() {
