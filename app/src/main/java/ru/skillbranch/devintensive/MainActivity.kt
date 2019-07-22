@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         Log.d("M_MainActivity", "onCreate")
 
+
         //benderImage = findViewById(R.id.iv_bender) as ImageView  // legacy
         benderImage = iv_bender
         textTxt = tv_text
