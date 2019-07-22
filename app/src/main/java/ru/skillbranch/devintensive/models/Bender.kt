@@ -15,9 +15,9 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
 
 
         return if (question.validation(answer).second) {
-            if (question.answer.contains(answer)) {
+            if (question.answer.contains(answer.toLowerCase())) {
                 question = question.nextQuestion()
-                "Отлично - ты справился!\n${question.question}" to status.color
+                "Отлично - ты справился\n${question.question}" to status.color
             } else {
                 if (status == Status.CRITICAL) {
                     status = Status.NORMAL
@@ -25,7 +25,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                     "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
                 } else {
                     status = status.nextStatus()
-                    "Это неправильный ответ!\n${question.question}" to status.color
+                    "Это неправильный ответ\n${question.question}" to status.color
                 }
             }
         } else {
@@ -56,45 +56,47 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         NAME("Как меня зовут?", listOf("бендер", "bender")) {
             override fun nextQuestion(): Question = PROFESSION
             override fun validation(answer: String): Pair<String, Boolean> {
-                return if (answer.first() != null) {
-                    if (answer.first().isLowerCase()) "Имя должно начинаться с заглавной буквы\nКак меня зовут?" to false
-                    else "" to true
-                } else "" to true
+                return if (answer.firstOrNull()?.isLowerCase() == true)
+                    "Имя должно начинаться с заглавной буквы\n$question" to false
+                else "" to true
             }
         },
         PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
             override fun nextQuestion(): Question = MATERIAL
             override fun validation(answer: String): Pair<String, Boolean> {
-                return if (!answer.first().isLowerCase()) "Профессия должна начинаться со строчной буквы\nНазови мою профессию?" to false
+                return if (answer.firstOrNull()?.isLowerCase() == false)
+                    "Профессия должна начинаться со строчной буквы\n$question" to false
                 else "" to true
             }
         },
         MATERIAL("Из чего я сделан?", listOf("метал", "дерево", "metal", "iron", "wood")) {
             override fun nextQuestion(): Question = BDAY
             override fun validation(answer: String): Pair<String, Boolean> {
-                return if (!answer.contains("\\d+".toRegex())) "Материал не должен содержать цифр\n$question" to false
+                return if (answer.contains("\\d+".toRegex()))
+                    "Материал не должен содержать цифр\n$question" to false
                 else "" to true
             }
         },
         BDAY("Когда меня создали?", listOf("2993")) {
             override fun nextQuestion(): Question = SERIAL
             override fun validation(answer: String): Pair<String, Boolean> {
-                return if (!answer.first().isLowerCase()) "Профессия должна начинаться со строчной буквы\nНазови мою профессию?" to false
+                return if (answer.contains("[^0-9]".toRegex()))
+                    "Год моего рождения должен содержать только цифры\n$question" to false
                 else "" to true
             }
         },
         SERIAL("Мой серийный номер?", listOf("2716057")) {
             override fun nextQuestion(): Question = IDLE
             override fun validation(answer: String): Pair<String, Boolean> {
-                return if (!answer.first().isLowerCase()) "Профессия должна начинаться со строчной буквы\nНазови мою профессию?" to false
+                return if (answer.contains("[^0-9]".toRegex()) || answer.length != 7)
+                    "Серийный номер содержит только цифры, и их 7\n$question" to false
                 else "" to true
             }
         },
         IDLE("На этом все, вопросов больше нет", listOf()) {
             override fun nextQuestion(): Question = IDLE
             override fun validation(answer: String): Pair<String, Boolean> {
-                return if (!answer.first().isLowerCase()) "Профессия должна начинаться со строчной буквы\nНазови мою профессию?" to false
-                else "" to true
+                return answer to true
             }
         };
 
