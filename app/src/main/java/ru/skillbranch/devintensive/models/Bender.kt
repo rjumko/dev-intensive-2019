@@ -13,18 +13,23 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
 
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
 
-        return if (question.answer.contains(answer)) {
-            question = question.nextQuestion()
-            "Отлично - ты справился!\n${question.question}" to status.color
-        } else {
-            if (status == Status.CRITICAL) {
-                status = Status.NORMAL
-                question = Question.NAME
-                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+
+        return if (question.validation(answer).second) {
+            if (question.answer.contains(answer)) {
+                question = question.nextQuestion()
+                "Отлично - ты справился!\n${question.question}" to status.color
             } else {
-                status = status.nextStatus()
-                "Это неправильный ответ!\n${question.question}" to status.color
+                if (status == Status.CRITICAL) {
+                    status = Status.NORMAL
+                    question = Question.NAME
+                    "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+                } else {
+                    status = status.nextStatus()
+                    "Это неправильный ответ!\n${question.question}" to status.color
+                }
             }
+        } else {
+            question.validation(answer).first to status.color
         }
     }
 
@@ -51,8 +56,10 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         NAME("Как меня зовут?", listOf("бендер", "bender")) {
             override fun nextQuestion(): Question = PROFESSION
             override fun validation(answer: String): Pair<String, Boolean> {
-                return if (answer.first().isLowerCase()) "Имя должно начинаться с заглавной буквы\nКак меня зовут?" to false
-                else "" to true
+                return if (answer.first() != null) {
+                    if (answer.first().isLowerCase()) "Имя должно начинаться с заглавной буквы\nКак меня зовут?" to false
+                    else "" to true
+                } else "" to true
             }
         },
         PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
@@ -65,7 +72,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         MATERIAL("Из чего я сделан?", listOf("метал", "дерево", "metal", "iron", "wood")) {
             override fun nextQuestion(): Question = BDAY
             override fun validation(answer: String): Pair<String, Boolean> {
-                return if (!answer.first().isLowerCase()) "Материал не должен содержать цифр\n$question" to false
+                return if (!answer.contains("\\d+".toRegex())) "Материал не должен содержать цифр\n$question" to false
                 else "" to true
             }
         },
