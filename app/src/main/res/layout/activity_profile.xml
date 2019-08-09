@@ -7,7 +7,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.profile.ProfileActivity">
-
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -17,13 +16,20 @@
                 android:src="@drawable/profile_bg"
                 android:scaleType="centerCrop"
                 app:aspectRatio="1.78"/>
-
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageButton
-                        android:layout_width="@dimen/button"
-                        android:layout_height="@dimen/button"/>
+            <ImageButton
+                    android:layout_width="@dimen/btn_round_size_40"
+                    android:layout_height="@dimen/btn_round_size_40"
+                    android:background="@drawable/btn_round_bg"/>
+            <ImageView
+                    android:layout_width="@dimen/avatar_round_size"
+                    android:layout_height="@dimen/avatar_round_size"/>
+            <ImageButton
+                    android:layout_width="@dimen/btn_round_size_40"
+                    android:layout_height="@dimen/btn_round_size_40"
+                    android:background="@drawable/btn_round_bg"/>
         </RelativeLayout>
 
     </FrameLayout>
