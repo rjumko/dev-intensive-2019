@@ -49,25 +49,21 @@
                     android:src="@drawable/ic_edit_black_24dp" />
 
             <TextView
+                    style="@style/Profile.Header.Nickname"
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/iv_avatar"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/spacing_normal_16"
-                    android:fontFamily="sans-serif-medium"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/font_large_20"
                     tools:text="John Doe" />
 
             <TextView
+                    style="@style/Profile.Header.Rank"
                     android:id="@+id/tv_rank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_name"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/font_normal_16"
                     tools:text="Junior Android Developer" />
         </RelativeLayout>
 
@@ -136,9 +132,9 @@
     </LinearLayout>
 
     <RelativeLayout
+            style="@style/Profile.InfoItem"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_normal_16">
+            android:layout_height="wrap_content">
 
         <ImageView
                 android:id="@+id/ic_avatar"
@@ -159,7 +155,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/profile_hint_first_name"
-                    tools:text="John" />
+                    tools:text="John"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -176,7 +174,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/profile_hint_last_name"
-                    tools:text="Doe" />
+                    tools:text="Doe"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"/>
         </com.google.android.material.textfield.TextInputLayout>
     </RelativeLayout>
 
@@ -190,7 +190,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/spacing_normal_16">
+            style="@style/Profile.InfoItem">
 
         <ImageView
                 android:layout_width="@dimen/btn_round_size_40"
@@ -221,7 +221,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/spacing_normal_16">
+            style="@style/Profile.InfoItem">
 
         <ImageView
                 android:layout_width="@dimen/btn_round_size_40"
