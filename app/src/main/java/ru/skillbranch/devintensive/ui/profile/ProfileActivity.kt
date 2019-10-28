@@ -47,7 +47,8 @@ class ProfileActivity : AppCompatActivity() {
             "rating" to tv_rating,
             "respect" to tv_respect
         )
-
+        isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
+        showCurrentMode(isEditMode)
         btn_edit.setOnClickListener(View.OnClickListener {
             //it.id
             isEditMode = !isEditMode
@@ -57,7 +58,14 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun showCurrentMode(isEdit: Boolean) {
-        val info = viewFields.filter { setOf("firstName", "lastName", "about", "repository").contains(it.key) }
+        val info = viewFields.filter {
+            setOf(
+                "firstName",
+                "lastName",
+                "about",
+                "repository"
+            ).contains(it.key)
+        }
         for ((_, v) in info) {
             v as EditText
             v.isFocusable = isEdit
@@ -70,7 +78,7 @@ class ProfileActivity : AppCompatActivity() {
         wr_about.isCounterEnabled = isEdit
 
         with(btn_edit) {
-            val filter: ColorFilter? = if(isEdit) {
+            val filter: ColorFilter? = if (isEdit) {
                 PorterDuffColorFilter(
                     resources.getColor(R.color.color_accent, theme),
                     PorterDuff.Mode.SRC_IN
@@ -79,7 +87,7 @@ class ProfileActivity : AppCompatActivity() {
                 null
             }
 
-            val icon = if(isEdit) {
+            val icon = if (isEdit) {
                 resources.getDrawable(R.drawable.ic_save_black_24dp)
             } else {
                 resources.getDrawable(R.drawable.ic_edit_black_24dp)
@@ -95,7 +103,7 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-
+        outState?.putBoolean(IS_EDIT_MODE, isEditMode)
     }
 
 
