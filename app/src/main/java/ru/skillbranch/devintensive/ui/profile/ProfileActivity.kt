@@ -1,7 +1,10 @@
 package ru.skillbranch.devintensive.ui.profile
 
+import android.content.Context
 import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -46,6 +49,7 @@ class ProfileActivity : AppCompatActivity() {
         )
 
         btn_edit.setOnClickListener(View.OnClickListener {
+            //it.id
             isEditMode = !isEditMode
             showCurrentMode(isEditMode)
         })
@@ -64,6 +68,27 @@ class ProfileActivity : AppCompatActivity() {
 
         ic_eye.visibility = if (isEdit) View.GONE else View.VISIBLE
         wr_about.isCounterEnabled = isEdit
+
+        with(btn_edit) {
+            val filter: ColorFilter? = if(isEdit) {
+                PorterDuffColorFilter(
+                    resources.getColor(R.color.color_accent, theme),
+                    PorterDuff.Mode.SRC_IN
+                )
+            } else {
+                null
+            }
+
+            val icon = if(isEdit) {
+                resources.getDrawable(R.drawable.ic_save_black_24dp)
+            } else {
+                resources.getDrawable(R.drawable.ic_edit_black_24dp)
+            }
+
+            background.colorFilter = filter
+            setImageDrawable(icon)
+
+        }
 
     }
 
